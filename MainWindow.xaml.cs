@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Win32;
 
 namespace ScreenCaptureDemo
 {
@@ -24,10 +25,59 @@ namespace ScreenCaptureDemo
         /// 记录快捷键注册项的唯一标识符
         /// </summary>
         private Dictionary<EHotKeySetting, int> m_HotKeySettings = new Dictionary<EHotKeySetting, int>();
+        System.Windows.Forms.NotifyIcon notifyIcon = null;
+        private BitmapImage SkinBitmap;
 
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+            NotifyIcon();
+        }
+
+        private void NotifyIcon()
+        {
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon();
+            //this.notifyIcon.BalloonTipText = "ECMS 服务正在运行..."; //设置程序启动时显示的文本
+            this.notifyIcon.Text = "Alt + A是截图快捷键";//最小化到托盘时，鼠标点击时显示的文本
+            this.notifyIcon.Icon = new Icon(@".\ico.ico");//程序图标
+            this.notifyIcon.Visible = true;
+
+            System.Windows.Forms.MenuItem skin = new System.Windows.Forms.MenuItem("设置背景");
+            skin.Click += Skin_Click;
+            //右键菜单--退出菜单项
+            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("关闭");
+            exit.Click += new EventHandler(CloseWindow);
+            //关联托盘控件
+            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] {skin, exit };
+            notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
+        }
+
+        private void Skin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog videoFile = new OpenFileDialog();
+                videoFile.Filter = "png|*.png|jpg|*.jpg";
+                if (videoFile.ShowDialog() == true)
+                {
+                    var fileName = videoFile.FileName;
+                    SkinBitmap = new BitmapImage(new Uri(fileName,UriKind.Relative));
+                }
+            }
+            catch
+            { }
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void CloseWindow(object sender, EventArgs e)
+        {
+            this.notifyIcon.Visible = false;
+            Application.Current.Shutdown();
         }
 
         /// <summary>
@@ -153,7 +203,8 @@ namespace ScreenCaptureDemo
                         DateTime dt = DateTime.Now;
                         Bitmap bitMap = ScreenCaptureHelper.GetScreenSnapshot();
                         BitmapImage bitmapImage = ScreenCaptureHelper.BitmapToBitmapImage(bitMap);
-                        PrintScreen win7 = new PrintScreen(bitmapImage, bitMap);
+                        //BitmapImage skinBitmap = ScreenCaptureHelper.BitmapToBitmapImage(SkinBitmap);
+                        PrintScreen win7 = new PrintScreen(bitmapImage, bitMap, SkinBitmap);
                         win7.ShowDialog();
 
                         ImageSource img = System.Windows.Clipboard.GetImage();
@@ -196,14 +247,14 @@ namespace ScreenCaptureDemo
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dt = DateTime.Now;
-            Bitmap bitMap = ScreenCaptureHelper.GetScreenSnapshot();
-            BitmapImage bitmapImage = ScreenCaptureHelper.BitmapToBitmapImage(bitMap);
+            //DateTime dt = DateTime.Now;
+            //Bitmap bitMap = ScreenCaptureHelper.GetScreenSnapshot();
+            //BitmapImage bitmapImage = ScreenCaptureHelper.BitmapToBitmapImage(bitMap);
 
-            PrintScreen win7 = new PrintScreen(bitmapImage, bitMap);
-            win7.ShowDialog();//开启截屏主界面
+            //PrintScreen win7 = new PrintScreen(bitmapImage, bitMap);
+            //win7.ShowDialog();//开启截屏主界面
 
-            ImageSource img = System.Windows.Clipboard.GetImage();
+            //ImageSource img = System.Windows.Clipboard.GetImage();
         }
 
     }

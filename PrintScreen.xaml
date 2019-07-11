@@ -20,12 +20,13 @@
     </Window.CommandBindings>
     <Grid x:Name="Container">
         <Image Name="ImageContainer" UseLayoutRounding="True" />
+        <Image Name="SkinImage" UseLayoutRounding="True" Opacity="0.5" Source="E:\GithubFile\ScreenCapture\ok.png"/>
         <Canvas Name="MainGrid" Background="Transparent" MouseDown="Window_MouseDown" MouseMove="Window_MouseMove" MouseLeave="Window_MouseLeave" MouseUp="Window_MouseUp">
         </Canvas>
         <StackPanel Orientation="Horizontal" Name="ToolPanel"  Visibility="Collapsed" Height="28" Width="150" Background="#f9fffb">
             <Button x:Name="OkClick" Click="Ok_Click" Background="#f9fffb" BorderThickness="0">
-                    <Image Source="./ok.png"></Image>
-                </Button>
+                <Image Source="./ok.png"></Image>
+            </Button>
             <Button x:Name="ExitClick" Click="Exit_Click" Background="#f9fffb" BorderThickness="0">
                 <Image Source="./error.png"></Image>
             </Button>
@@ -33,7 +34,6 @@
                 <Image Source="./save.png"></Image>
             </Button>
         </StackPanel>
-        
     </Grid>
     
 </Window>

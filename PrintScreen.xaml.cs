@@ -16,6 +16,7 @@ namespace ScreenCaptureDemo
         #region 参数定义
         private BitmapImage GlobalBitmapImage;
         private System.Drawing.Bitmap GlobalBitmap;
+        private BitmapImage SkinBitmap;
         private bool ScopeFlag = false;//标志是否选定范围
         private Point MovePreviousPoint;//移动前的点
         private Point MoveCurrentPoint;//移动时的点
@@ -41,13 +42,14 @@ namespace ScreenCaptureDemo
         /// </summary>
         /// <param name="bitmapImage"></param>
         /// <param name="bitMap"></param>
-        public PrintScreen(BitmapImage bitmapImage, System.Drawing.Bitmap bitMap)
+        public PrintScreen(BitmapImage bitmapImage, System.Drawing.Bitmap bitMap, BitmapImage skinBitmap)
         {
             InitializeComponent();
             Loaded += PrintScreen_Loaded;
             Closed += PrintScreen_Closed;
             GlobalBitmap = bitMap;
             GlobalBitmapImage = bitmapImage;
+            SkinBitmap = skinBitmap;
         }
 
         private void PrintScreen_Closed(object sender, EventArgs e)
@@ -68,6 +70,7 @@ namespace ScreenCaptureDemo
             Left = 0;
             Top = 0;
             ImageContainer.Source = GlobalBitmapImage;
+            SkinImage.Source = SkinBitmap;
             //将范围选择框与八个范围控制点初始化并加入到Canvas容器中
             GlobalBorder = new Border() { BorderBrush = Brushes.BlueViolet, BorderThickness = new Thickness(2), Visibility = Visibility.Collapsed, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top };
             MainGrid.Children.Add(GlobalBorder);
