@@ -72,7 +72,7 @@ namespace ScreenCaptureDemo
             ImageContainer.Source = GlobalBitmapImage;
             SkinImage.Source = SkinBitmap;
             //将范围选择框与八个范围控制点初始化并加入到Canvas容器中
-            GlobalBorder = new Border() { BorderBrush = Brushes.BlueViolet, BorderThickness = new Thickness(2), Visibility = Visibility.Collapsed, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top };
+            GlobalBorder = new Border() { BorderBrush = Brushes.BlueViolet, BorderThickness = new Thickness(2), Visibility = Visibility.Collapsed, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, Width = 0,Height = 0 };
             MainGrid.Children.Add(GlobalBorder);
             LeftAnchor = new Border() { Width = 6, Height = 6, Background = Brushes.Blue, Visibility = Visibility.Collapsed, Cursor = Cursors.SizeWE, BorderThickness = new Thickness(0), Tag = PointEnum.Left };
             MainGrid.Children.Add(LeftAnchor);
@@ -366,18 +366,21 @@ namespace ScreenCaptureDemo
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
         {
             CurrentPoint = PointEnum.None;
-            ToolPanel.Visibility = Visibility.Visible;
-            if (GlobalBorder.Margin.Top + GlobalBorder.Height > windows.ActualHeight - 44 && GlobalBorder.Margin.Top >= 44)
+            if (GlobalBorder.Width != 0 && GlobalBorder.Height != 0)
             {
-                ToolPanel.Margin = new Thickness(GlobalBorder.Margin.Left + GlobalBorder.Width - 160, GlobalBorder.Margin.Top - 42, windows.Width - (GlobalBorder.Margin.Left + GlobalBorder.Width), windows.Height - GlobalBorder.Margin.Top);
-            }
-            else if (GlobalBorder.Margin.Top + GlobalBorder.Height > windows.ActualHeight - 44 && GlobalBorder.Margin.Top < 44)
-            {
-                ToolPanel.Margin = new Thickness(GlobalBorder.Margin.Left + GlobalBorder.Width - 160, GlobalBorder.Margin.Top, windows.Width - (GlobalBorder.Margin.Left + GlobalBorder.Width), windows.Height - GlobalBorder.Margin.Top - 40);
-            }
-            else
-            {
-                ToolPanel.Margin = new Thickness(GlobalBorder.Margin.Left + GlobalBorder.Width - 160, GlobalBorder.Margin.Top + GlobalBorder.Height, windows.Width - (GlobalBorder.Margin.Left + GlobalBorder.Width), windows.Height - (GlobalBorder.Margin.Top + GlobalBorder.Height) - 45);
+                ToolPanel.Visibility = Visibility.Visible;
+                if (GlobalBorder.Margin.Top + GlobalBorder.Height > windows.ActualHeight - 44 && GlobalBorder.Margin.Top >= 44)
+                {
+                    ToolPanel.Margin = new Thickness(GlobalBorder.Margin.Left + GlobalBorder.Width - 160, GlobalBorder.Margin.Top - 42, windows.Width - (GlobalBorder.Margin.Left + GlobalBorder.Width), windows.Height - GlobalBorder.Margin.Top);
+                }
+                else if (GlobalBorder.Margin.Top + GlobalBorder.Height > windows.ActualHeight - 44 && GlobalBorder.Margin.Top < 44)
+                {
+                    ToolPanel.Margin = new Thickness(GlobalBorder.Margin.Left + GlobalBorder.Width - 160, GlobalBorder.Margin.Top, windows.Width - (GlobalBorder.Margin.Left + GlobalBorder.Width), windows.Height - GlobalBorder.Margin.Top - 40);
+                }
+                else
+                {
+                    ToolPanel.Margin = new Thickness(GlobalBorder.Margin.Left + GlobalBorder.Width - 160, GlobalBorder.Margin.Top + GlobalBorder.Height, windows.Width - (GlobalBorder.Margin.Left + GlobalBorder.Width), windows.Height - (GlobalBorder.Margin.Top + GlobalBorder.Height) - 45);
+                }
             }
             ScopeFlag = true;
         }
