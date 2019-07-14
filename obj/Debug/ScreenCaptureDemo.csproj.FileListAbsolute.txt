@@ -32,3 +32,5 @@ D:\VS-learn\ScreenCapture\obj\Debug\ScreenCaptureDemo.csproj.GenerateResource.ca
 D:\VS-learn\ScreenCapture\obj\Debug\ScreenCaptureDemo.csproj.CoreCompileInputs.cache
 D:\VS-learn\ScreenCapture\obj\Debug\ScreenCaptureDemo.exe
 D:\VS-learn\ScreenCapture\obj\Debug\ScreenCaptureDemo.pdb
+D:\VS-learn\ScreenCapture\obj\Debug\Setting.g.cs
+D:\VS-learn\ScreenCapture\obj\Debug\Setting.baml

@@ -46,11 +46,20 @@ namespace ScreenCaptureDemo
             //System.Windows.Forms.MenuItem skin = new System.Windows.Forms.MenuItem("设置背景");
             //skin.Click += Skin_Click;
             //右键菜单--退出菜单项
-            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("关闭");
+            System.Windows.Forms.MenuItem setting = new System.Windows.Forms.MenuItem("设置");
+            setting.Click += new EventHandler(SettingWindow);
+            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
             exit.Click += new EventHandler(CloseWindow);
             //关联托盘控件
-            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { exit };
+            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { setting,exit };
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
+        }
+
+        private void SettingWindow(object sender, EventArgs e)
+        {
+            if (App.Current.Windows.Cast<Window>().Any(x => x is Setting)) return;
+            Setting setting = new Setting();
+            setting.ShowDialog();
         }
 
         private void Skin_Click(object sender, EventArgs e)
@@ -199,7 +208,6 @@ namespace ScreenCaptureDemo
                     if (sid == m_HotKeySettings[EHotKeySetting.截图])
                     {
                         //hotkeySetting = EHotKeySetting.截图;
-
                         DateTime dt = DateTime.Now;
                         Bitmap bitMap = ScreenCaptureHelper.GetScreenSnapshot();
                         BitmapImage bitmapImage = ScreenCaptureHelper.BitmapToBitmapImage(bitMap);
