@@ -25,7 +25,7 @@ namespace ScreenCaptureDemo
         {
             var hotKeyList = new ObservableCollection<HotKeyModel>();
             //hotKeyList.Add(new HotKeyModel { Name = EHotKeySetting.全屏.ToString(), IsUsable = true, IsSelectCtrl = true, IsSelectAlt = true, IsSelectShift = false, SelectKey = EKey.Q });
-            hotKeyList.Add(new HotKeyModel { Name = EHotKeySetting.截图.ToString(), IsUsable = true, IsSelectCtrl = false, IsSelectAlt = true, IsSelectShift = false, SelectKey = EKey.A });
+            hotKeyList.Add(new HotKeyModel { Name = EHotKeySetting.截图.ToString(), IsUsable = true, IsSelectCtrl = false, IsSelectAlt = true, IsSelectShift = false, SelectKey = EKey.Z });
             //hotKeyList.Add(new HotKeyModel { Name = EHotKeySetting.播放.ToString(), IsUsable = true, IsSelectCtrl = true, IsSelectAlt = true, IsSelectShift = false, SelectKey = EKey.Space });
             //hotKeyList.Add(new HotKeyModel { Name = EHotKeySetting.前进.ToString(), IsUsable = true, IsSelectCtrl = true, IsSelectAlt = true, IsSelectShift = false, SelectKey = EKey.D });
             //hotKeyList.Add(new HotKeyModel { Name = EHotKeySetting.后退.ToString(), IsUsable = true, IsSelectCtrl = true, IsSelectAlt = true, IsSelectShift = false, SelectKey = EKey.A });

@@ -42,14 +42,14 @@ namespace ScreenCaptureDemo
         /// </summary>
         /// <param name="bitmapImage"></param>
         /// <param name="bitMap"></param>
-        public PrintScreen(BitmapImage bitmapImage, System.Drawing.Bitmap bitMap, BitmapImage skinBitmap)
+        public PrintScreen(BitmapImage bitmapImage, System.Drawing.Bitmap bitMap)
         {
             InitializeComponent();
             Loaded += PrintScreen_Loaded;
             Closed += PrintScreen_Closed;
             GlobalBitmap = bitMap;
             GlobalBitmapImage = bitmapImage;
-            SkinBitmap = skinBitmap;
+            //SkinBitmap = skinBitmap;
         }
 
         private void PrintScreen_Closed(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace ScreenCaptureDemo
             Left = 0;
             Top = 0;
             ImageContainer.Source = GlobalBitmapImage;
-            SkinImage.Source = SkinBitmap;
+            //SkinImage.Source = SkinBitmap;
             //将范围选择框与八个范围控制点初始化并加入到Canvas容器中
             GlobalBorder = new Border() { BorderBrush = Brushes.BlueViolet, BorderThickness = new Thickness(2), Visibility = Visibility.Collapsed, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, Width = 0,Height = 0 };
             MainGrid.Children.Add(GlobalBorder);

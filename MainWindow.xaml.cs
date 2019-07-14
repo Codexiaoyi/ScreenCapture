@@ -26,7 +26,7 @@ namespace ScreenCaptureDemo
         /// </summary>
         private Dictionary<EHotKeySetting, int> m_HotKeySettings = new Dictionary<EHotKeySetting, int>();
         System.Windows.Forms.NotifyIcon notifyIcon = null;
-        private BitmapImage SkinBitmap;
+        private Bitmap SkinBitmap;
 
         public MainWindow()
         {
@@ -39,17 +39,17 @@ namespace ScreenCaptureDemo
         {
             this.notifyIcon = new System.Windows.Forms.NotifyIcon();
             //this.notifyIcon.BalloonTipText = "ECMS 服务正在运行..."; //设置程序启动时显示的文本
-            this.notifyIcon.Text = "Alt + A是截图快捷键";//最小化到托盘时，鼠标点击时显示的文本
+            this.notifyIcon.Text = "Alt + Z是截图快捷键";//最小化到托盘时，鼠标点击时显示的文本
             this.notifyIcon.Icon = new Icon(@".\ico.ico");//程序图标
             this.notifyIcon.Visible = true;
 
-            System.Windows.Forms.MenuItem skin = new System.Windows.Forms.MenuItem("设置背景");
-            skin.Click += Skin_Click;
+            //System.Windows.Forms.MenuItem skin = new System.Windows.Forms.MenuItem("设置背景");
+            //skin.Click += Skin_Click;
             //右键菜单--退出菜单项
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("关闭");
             exit.Click += new EventHandler(CloseWindow);
             //关联托盘控件
-            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] {skin, exit };
+            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { exit };
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
         }
 
@@ -62,7 +62,7 @@ namespace ScreenCaptureDemo
                 if (videoFile.ShowDialog() == true)
                 {
                     var fileName = videoFile.FileName;
-                    SkinBitmap = new BitmapImage(new Uri(fileName,UriKind.Relative));
+                    SkinBitmap = new Bitmap(fileName);
                 }
             }
             catch
@@ -204,10 +204,10 @@ namespace ScreenCaptureDemo
                         Bitmap bitMap = ScreenCaptureHelper.GetScreenSnapshot();
                         BitmapImage bitmapImage = ScreenCaptureHelper.BitmapToBitmapImage(bitMap);
                         //BitmapImage skinBitmap = ScreenCaptureHelper.BitmapToBitmapImage(SkinBitmap);
-                        PrintScreen win7 = new PrintScreen(bitmapImage, bitMap, SkinBitmap);
+                        PrintScreen win7 = new PrintScreen(bitmapImage, bitMap);
                         win7.ShowDialog();
 
-                        ImageSource img = System.Windows.Clipboard.GetImage();
+                        //ImageSource img = System.Windows.Clipboard.GetImage();
                     }
                     //else if (sid == m_HotKeySettings[EHotKeySetting.播放])
                     //{

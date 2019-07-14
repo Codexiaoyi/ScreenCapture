@@ -24,7 +24,6 @@ namespace ScreenCaptureDemo
             {
                 g.CopyFromScreen(rc.X, rc.Y, 0, 0, rc.Size, CopyPixelOperation.SourceCopy);
             }
-
             return bitmap;
         }
 
